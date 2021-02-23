@@ -18,31 +18,29 @@ identity_lock  = Event()
 identity_lock.set()
 
 #
-# Grab the list of onions from our master list file.
+# Grab the list of onions from our onion dir list file.
 #
 def get_onion_list():
 	
 	# open the master list
-	if os.path.exists("onion_master_list.txt"):
+	if os.path.exists("onion_dir_list.txt"):
 	
-		with open("onion_master_list.txt","rb") as fd:
+		with open("onion_dir_list.txt","rb") as fd:
 
 			stored_onions = fd.read().splitlines()	
 	else:
-		print("[!] No onion master list. Download it!")
+		print("[!] No onion dir list. Download it!")
 		sys.exit(0)
 	
 	print("[*] Total onions for scanning: %d" % len(stored_onions))
 
 	return stored_onions
 #
-# Stores an onion in the master list of onions.
-#
 def store_onion(onion):
 	
-	print("[++] Storing %s in master list." % onion)
+	print("[++] Storing %s in dir list." % onion)
 	
-	with codecs.open("onion_master_list.txt","ab",encoding="utf8") as fd:
+	with codecs.open("onion_dir_list.txt","ab",encoding="utf8") as fd:
 		fd.write("%s\n" % onion)
 
 	return
